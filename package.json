@@ -1,0 +1,24 @@
+{
+  "name": "jashanpreet-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm run --parallel --filter \"@jashanpreet/web\" --filter \"@jashanpreet/api\" dev",
+    "dev:web": "pnpm run --filter \"@jashanpreet/web\" dev",
+    "dev:api": "pnpm run --filter \"@jashanpreet/api\" dev",
+    "build": "pnpm run -r build",
+    "build:web": "pnpm run --filter \"@jashanpreet/web\" build",
+    "build:api": "pnpm run --filter \"@jashanpreet/api\" build",
+    "typecheck": "pnpm run -r typecheck",
+    "lint": "pnpm run -r lint",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md,yaml,yml}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0",
+    "typescript": "^5.8.0"
+  }
+}
