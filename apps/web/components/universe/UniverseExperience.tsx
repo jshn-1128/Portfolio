@@ -39,6 +39,17 @@ export function UniverseExperience() {
   return (
     <div className="relative h-svh overflow-hidden" aria-label="Interactive 3D universe">
       <UniverseCanvas quality={quality} reducedMotion={reducedMotion} />
+      {/* Cinematic vignette: keeps edges of the frame quiet and helps the
+          header/footer read over the void. Purely decorative. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 50% 42%, transparent 46%, rgba(2, 2, 7, 0.42) 100%), " +
+            "linear-gradient(to bottom, rgba(2, 2, 7, 0.55), transparent 22%, transparent 74%, rgba(2, 2, 7, 0.4))",
+        }}
+      />
       <UniverseIdentity />
       {process.env.NODE_ENV === "development" && (
         <DebugPanel

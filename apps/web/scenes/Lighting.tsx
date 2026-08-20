@@ -3,36 +3,30 @@
 import { SPACE_COLORS } from "@/lib/universe/constants";
 
 /**
- * Minimal lighting rig. One neutral key, plus cool blue and violet accents
- * that read as atmosphere rather than neon. No shadows (expensive, and the
- * scene doesn't need them).
+ * Minimal lighting rig: one controlled key light for dimensionality, plus
+ * two very subtle rim accents (violet behind, blue fill in front). Nothing
+ * reads as a visible light source; the core is lit, not flooded.
  */
 export function Lighting() {
   return (
     <>
-      <ambientLight intensity={0.35} />
+      <ambientLight intensity={0.16} />
       <directionalLight
-        position={[4, 6, 8]}
-        intensity={1.15}
-        color="#E8E9FF"
+        position={[5, 7, 9]}
+        intensity={1.1}
+        color="#E9E9F5"
       />
       <pointLight
-        position={[-4, -2, 3]}
-        intensity={14}
-        distance={25}
-        color={SPACE_COLORS.blue}
-      />
-      <pointLight
-        position={[4, -3, -4]}
-        intensity={10}
-        distance={22}
+        position={[-6, 2, -5]}
+        intensity={5}
+        distance={30}
         color={SPACE_COLORS.violet}
       />
       <pointLight
-        position={[0, 3, -6]}
-        intensity={6}
-        distance={18}
-        color={SPACE_COLORS.cyan}
+        position={[2, -4, 5]}
+        intensity={3}
+        distance={24}
+        color={SPACE_COLORS.blue}
       />
     </>
   );

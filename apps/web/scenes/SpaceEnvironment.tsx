@@ -10,7 +10,7 @@ export function SpaceEnvironment() {
   return (
     <>
       <color attach="background" args={[SPACE_BACKGROUND]} />
-      <fog attach="fog" args={[SPACE_BACKGROUND, 38, 85]} />
+      <fog attach="fog" args={[SPACE_BACKGROUND, 32, 72]} />
     </>
   );
 }

@@ -179,6 +179,17 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
+
+  /* Conceptual planet labels inside the 3D universe (drei Html) */
+  .planet-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(214, 218, 240, 0.66);
+    white-space: nowrap;
+    text-shadow: 0 0 14px rgba(0, 0, 0, 0.85);
+  }
 }
 
 /* Decorative hero glow — disabled for reduced motion */

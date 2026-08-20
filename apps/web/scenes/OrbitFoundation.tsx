@@ -21,7 +21,8 @@ function circlePoints(radius: number, segments = 128): [number, number, number][
 
 /**
  * A few extremely subtle orbital rings establishing the future planetary
- * language. Thin, low-opacity, gently tilted; nothing more.
+ * language. Faint thin lines — gravitational paths, not drawn circles.
+ * The whole group is gently tilted so the rings read in 3D.
  */
 export function OrbitFoundation({ reducedMotion }: OrbitFoundationProps) {
   const groupRef = useRef<THREE.Group>(null);
@@ -35,10 +36,13 @@ export function OrbitFoundation({ reducedMotion }: OrbitFoundationProps) {
   });
 
   return (
-    <group ref={groupRef}>
+    <group
+      ref={groupRef}
+      rotation={[-0.14, 0, 0.08] as [number, number, number]}
+    >
       {ORBITS.radii.map((radius, index) => {
         const tiltAxis =
-          index % 2 === 0 ? [ORBITS.tilt, 0, 0] : [0, 0, ORBITS.tilt * 0.7];
+          index % 2 === 0 ? [ORBITS.tilt, 0, 0] : [0, 0, ORBITS.tilt * 0.6];
         return (
           <group key={radius} rotation={tiltAxis as [number, number, number]}>
             <Line

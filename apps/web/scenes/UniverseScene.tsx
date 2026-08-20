@@ -6,6 +6,7 @@ import { CentralCore } from "@/scenes/CentralCore";
 import { CameraRig } from "@/scenes/CameraRig";
 import { Lighting } from "@/scenes/Lighting";
 import { OrbitFoundation } from "@/scenes/OrbitFoundation";
+import { PlanetSystem } from "@/scenes/PlanetSystem";
 import { SpaceEnvironment } from "@/scenes/SpaceEnvironment";
 import { Starfield } from "@/scenes/Starfield";
 
@@ -33,8 +34,10 @@ export function UniverseScene({ quality, reducedMotion }: UniverseSceneProps) {
       <CentralCore
         energyCount={config.energyParticleCount}
         reducedMotion={reducedMotion}
+        quality={quality}
       />
       {config.showOrbits && <OrbitFoundation reducedMotion={reducedMotion} />}
+      <PlanetSystem quality={quality} />
       <CameraRig reducedMotion={reducedMotion} />
     </>
   );

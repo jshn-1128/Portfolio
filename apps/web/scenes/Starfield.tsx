@@ -21,8 +21,10 @@ const STAR_COLORS = [
 
 /**
  * Efficient 3D starfield: a single `Points` draw call with a deterministic
- * random distribution in a spherical shell. Parallax comes for free from the
- * camera rig moving inside the shell; the whole field drifts very slowly.
+ * random distribution in a spherical shell. Stars are biased away from the
+ * center and kept dim so the core reads as the focus. Parallax comes for
+ * free from the camera rig moving inside the shell; the whole field drifts
+ * very slowly.
  */
 export function Starfield({ count, quality, reducedMotion }: StarfieldProps) {
   const pointsRef = useRef<THREE.Points>(null);
@@ -39,11 +41,13 @@ export function Starfield({ count, quality, reducedMotion }: StarfieldProps) {
     };
 
     const color = new THREE.Color();
+    const radiusRange = STARFIELD.maxRadius - STARFIELD.minRadius;
 
     for (let i = 0; i < count; i++) {
-      // Uniform point in a spherical shell.
+      // Bias toward the outer shell: fewer stars near the visual focus.
       const radius =
-        STARFIELD.minRadius + rand(i) * (STARFIELD.maxRadius - STARFIELD.minRadius);
+        STARFIELD.minRadius +
+        Math.pow(rand(i), 0.6) * radiusRange;
       const theta = rand(i + count) * Math.PI * 2;
       const phi = Math.acos(2 * rand(i + count * 2) - 1);
 
@@ -55,8 +59,9 @@ export function Starfield({ count, quality, reducedMotion }: StarfieldProps) {
         STAR_COLORS[Math.floor(rand(i + count * 3) * STAR_COLORS.length)] ??
         SPACE_COLORS.starWhite;
       color.set(base);
-      // Slight brightness variation for depth.
-      color.multiplyScalar(0.55 + rand(i + count * 4) * 0.45);
+      // Dim, varied brightness: nearer stars fade so the core dominates.
+      const depthFade = 0.5 + 0.5 * ((radius - STARFIELD.minRadius) / radiusRange);
+      color.multiplyScalar((0.22 + rand(i + count * 4) * 0.5) * depthFade);
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
@@ -95,7 +100,7 @@ export function Starfield({ count, quality, reducedMotion }: StarfieldProps) {
         sizeAttenuation
         vertexColors
         transparent
-        opacity={0.85}
+        opacity={0.7}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />

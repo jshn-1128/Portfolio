@@ -23,6 +23,18 @@ export interface CameraPlacementData {
   fov: number;
 }
 
+/** A temporary conceptual planet orbiting the core. */
+export interface PlanetConfig {
+  id: string;
+  label: string;
+  /** Body tint — each planet reads slightly differently. */
+  color: string;
+  /** Deep emissive variant of the tint. */
+  emissive: string;
+  radius: number;
+  position: Vector3Tuple;
+}
+
 /** Settings that vary by device quality tier. */
 export interface UniverseQualityConfig {
   /** Total star particles. */
