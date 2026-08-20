@@ -36,12 +36,6 @@ export function SiteFooter() {
             >
               Contact
             </Link>
-            <Link
-              href="/blog"
-              className="text-small text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Blog
-            </Link>
           </div>
         </nav>
 
