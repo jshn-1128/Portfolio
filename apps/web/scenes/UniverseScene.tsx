@@ -37,7 +37,7 @@ export function UniverseScene({ quality, reducedMotion }: UniverseSceneProps) {
         quality={quality}
       />
       {config.showOrbits && <OrbitFoundation reducedMotion={reducedMotion} />}
-      <PlanetSystem quality={quality} />
+      <PlanetSystem quality={quality} reducedMotion={reducedMotion} />
       <CameraRig reducedMotion={reducedMotion} />
     </>
   );

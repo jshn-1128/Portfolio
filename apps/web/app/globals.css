@@ -189,6 +189,53 @@
     color: rgba(214, 218, 240, 0.66);
     white-space: nowrap;
     text-shadow: 0 0 14px rgba(0, 0, 0, 0.85);
+    transition: color 0.2s ease;
+  }
+
+  .planet-label--hovered {
+    color: rgba(214, 218, 240, 0.92);
+    text-shadow: 0 0 20px rgba(139, 152, 255, 0.3);
+  }
+
+  .planet-label--selected {
+    color: rgba(214, 218, 240, 1);
+    text-shadow: 0 0 24px rgba(139, 152, 255, 0.45);
+  }
+
+  /* Accessible planet navigation buttons — visually discreet, focus-visible safe */
+  .planet-nav-btn {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(214, 218, 240, 0.35);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.55rem 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    outline: none;
+  }
+
+  .planet-nav-btn:hover,
+  .planet-nav-btn--hovered {
+    color: rgba(214, 218, 240, 0.75);
+    border-color: rgba(139, 152, 255, 0.2);
+    background-color: rgba(139, 152, 255, 0.06);
+  }
+
+  .planet-nav-btn--selected {
+    color: rgba(139, 152, 255, 1);
+    border-color: rgba(139, 152, 255, 0.35);
+    background-color: rgba(139, 152, 255, 0.08);
+  }
+
+  .planet-nav-btn:focus-visible {
+    outline: 2px solid rgba(139, 152, 255, 0.7);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 

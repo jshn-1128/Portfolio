@@ -79,15 +79,19 @@ export const ORBITS = {
 } as const;
 
 /**
- * Temporary conceptual planets. Their arrangement starts to map the future
- * spatial portfolio: Experience up, Skills up-right, Projects up-left,
- * About to the right. Blues and violets only, low saturation, always
- * visually secondary to the core.
+ * Conceptual planets. Their arrangement maps the spatial portfolio:
+ * Experience up, Skills up-right, Projects up-left, About to the right.
+ * Blues and violets only, low saturation, always visually secondary to the
+ * core. Each planet carries a typed `destination` and `cameraTarget` for the
+ * interaction system (Phase 4B) and future camera travel (Phase 5).
  */
 export const PLANETS: readonly PlanetConfig[] = [
   {
     id: "experience",
     label: "EXPERIENCE",
+    destination: "experience",
+    interactive: true,
+    cameraTarget: "experience",
     color: "#43306B",
     emissive: "#2A1F47",
     radius: 0.34,
@@ -96,6 +100,9 @@ export const PLANETS: readonly PlanetConfig[] = [
   {
     id: "skills",
     label: "SKILLS",
+    destination: "skills",
+    interactive: true,
+    cameraTarget: "skills",
     color: "#4A3A78",
     emissive: "#2E2350",
     radius: 0.3,
@@ -104,6 +111,9 @@ export const PLANETS: readonly PlanetConfig[] = [
   {
     id: "projects",
     label: "PROJECTS",
+    destination: "projects",
+    interactive: true,
+    cameraTarget: "projects",
     color: "#33406F",
     emissive: "#1E2745",
     radius: 0.32,
@@ -112,6 +122,9 @@ export const PLANETS: readonly PlanetConfig[] = [
   {
     id: "about",
     label: "ABOUT",
+    destination: "about",
+    interactive: true,
+    cameraTarget: "about",
     color: "#2C445C",
     emissive: "#182C42",
     radius: 0.28,
@@ -120,8 +133,10 @@ export const PLANETS: readonly PlanetConfig[] = [
 ] as const;
 
 /**
- * Camera placements for future cinematic targets. Only `home` is
- * implemented in this phase; the type surface is ready for the rest.
+ * Camera placements for future cinematic targets. `home` is the only active
+ * placement (Phase 3–4A); the rest are data-only, prepared for Phase 5 camera
+ * travel. Each planet-destination camera looks toward its planet from an
+ * elevated, slightly offset vantage point.
  */
 export const CAMERA_TARGETS: Record<CameraPlacement, CameraPlacementData> = {
   home: {
@@ -130,24 +145,39 @@ export const CAMERA_TARGETS: Record<CameraPlacement, CameraPlacementData> = {
     target: [0, 0, 0],
     fov: 45,
   },
-  projects: {
-    key: "projects",
-    position: [0, 1.4, 7],
-    target: [0, 0, 0],
-    fov: 45,
-  },
-  skills: { key: "skills", position: [0, 1.4, 7], target: [0, 0, 0], fov: 45 },
   experience: {
     key: "experience",
-    position: [0, 1.4, 7],
+    position: [0, 3.5, 5] satisfies Vector3Tuple,
+    target: [0, 2.15, -1.2],
+    fov: 45,
+  },
+  skills: {
+    key: "skills",
+    position: [2.8, 2.8, 4.5] satisfies Vector3Tuple,
+    target: [1.85, 1.5, -1.5],
+    fov: 45,
+  },
+  projects: {
+    key: "projects",
+    position: [-2.8, 2.8, 4.5] satisfies Vector3Tuple,
+    target: [-1.85, 1.5, -1.5],
+    fov: 45,
+  },
+  about: {
+    key: "about",
+    position: [4, 1.5, 5] satisfies Vector3Tuple,
+    target: [2.7, -0.1, -0.5],
+    fov: 45,
+  },
+  resume: {
+    key: "resume",
+    position: [0, 1.4, 7] satisfies Vector3Tuple,
     target: [0, 0, 0],
     fov: 45,
   },
-  about: { key: "about", position: [0, 1.4, 7], target: [0, 0, 0], fov: 45 },
-  resume: { key: "resume", position: [0, 1.4, 7], target: [0, 0, 0], fov: 45 },
   contact: {
     key: "contact",
-    position: [0, 1.4, 7],
+    position: [0, 1.4, 7] satisfies Vector3Tuple,
     target: [0, 0, 0],
     fov: 45,
   },

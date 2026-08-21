@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { DebugPanel } from "@/components/universe/DebugPanel";
+import { PlanetNav } from "@/components/universe/PlanetNav";
 import { UniverseFallback } from "@/components/universe/UniverseFallback";
 import { UniverseIdentity } from "@/components/universe/UniverseIdentity";
 import { useDeviceQuality } from "@/hooks/use-device-quality";
@@ -51,6 +52,7 @@ export function UniverseExperience() {
         }}
       />
       <UniverseIdentity />
+      <PlanetNav />
       {process.env.NODE_ENV === "development" && (
         <DebugPanel
           quality={quality}
