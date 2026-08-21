@@ -6,6 +6,8 @@ import {
   universeInteraction,
   useUniverseInteraction,
 } from "@/lib/universe/interaction";
+import { navigationStore } from "@/lib/universe/navigation-store";
+import type { UniverseDestination } from "@/lib/universe/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -36,6 +38,7 @@ export function PlanetNav() {
             <li key={planet.id}>
               <PlanetButton
                 planetId={planet.id}
+                destination={planet.destination}
                 label={planet.label}
                 isHovered={isHovered}
                 isSelected={isSelected}
@@ -54,6 +57,7 @@ export function PlanetNav() {
 
 interface PlanetButtonProps {
   planetId: string;
+  destination: UniverseDestination;
   label: string;
   isHovered: boolean;
   isSelected: boolean;
@@ -61,6 +65,7 @@ interface PlanetButtonProps {
 
 function PlanetButton({
   planetId,
+  destination,
   label,
   isHovered,
   isSelected,
@@ -74,8 +79,8 @@ function PlanetButton({
   }, []);
 
   const onClick = useCallback(() => {
-    universeInteraction.select(planetId as "experience" | "skills" | "projects" | "about");
-  }, [planetId]);
+    navigationStore.navigateTo(destination);
+  }, [destination]);
 
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent) => {

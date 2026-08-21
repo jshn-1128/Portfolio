@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import { DebugPanel } from "@/components/universe/DebugPanel";
 import { PlanetNav } from "@/components/universe/PlanetNav";
 import { UniverseFallback } from "@/components/universe/UniverseFallback";
@@ -9,6 +10,7 @@ import { useDeviceQuality } from "@/hooks/use-device-quality";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useWebGL } from "@/hooks/use-webgl";
 import { QUALITY_CONFIG } from "@/lib/universe/performance";
+import { navigationStore } from "@/lib/universe/navigation-store";
 
 /**
  * The WebGL canvas must never be server-rendered — it is mounted on the
@@ -32,6 +34,17 @@ export function UniverseExperience() {
   const webgl = useWebGL();
   const quality = useDeviceQuality();
   const reducedMotion = usePrefersReducedMotion();
+
+  // Escape key returns to home when not already transitioning.
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        navigationStore.goHome();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   if (!webgl) {
     return <UniverseFallback />;

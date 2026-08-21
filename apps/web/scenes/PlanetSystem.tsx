@@ -9,6 +9,7 @@ import {
   universeInteraction,
   useUniverseInteraction,
 } from "@/lib/universe/interaction";
+import { navigationStore } from "@/lib/universe/navigation-store";
 import type { PlanetConfig, Quality } from "@/lib/universe/types";
 
 interface PlanetSystemProps {
@@ -146,8 +147,8 @@ function Planet({
   }, []);
 
   const onClick = useCallback(() => {
-    universeInteraction.select(planet.id);
-  }, [planet.id]);
+    navigationStore.navigateTo(planet.destination);
+  }, [planet.destination]);
 
   const position: [number, number, number] = [
     planet.position[0] * spread,

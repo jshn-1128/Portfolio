@@ -38,7 +38,7 @@ export function UniverseScene({ quality, reducedMotion }: UniverseSceneProps) {
       />
       {config.showOrbits && <OrbitFoundation reducedMotion={reducedMotion} />}
       <PlanetSystem quality={quality} reducedMotion={reducedMotion} />
-      <CameraRig reducedMotion={reducedMotion} />
+      <CameraRig reducedMotion={reducedMotion} />{/* reads destination from navigation store */}
     </>
   );
 }

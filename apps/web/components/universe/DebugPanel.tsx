@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Quality } from "@/lib/universe/types";
+import { useNavigationStore } from "@/lib/universe/navigation-store";
 
 interface DebugPanelProps {
   quality: Quality;
@@ -10,7 +11,8 @@ interface DebugPanelProps {
 }
 
 /**
- * Development-only overlay: FPS, quality tier, particle count, WebGL status.
+ * Development-only overlay: FPS, quality tier, particle count, WebGL status,
+ * and live navigation state (current destination, transition status).
  * Rendered exclusively when `NODE_ENV === "development"` — it never ships
  * in production builds.
  */
@@ -18,6 +20,7 @@ export function DebugPanel({ quality, particleCount, webgl }: DebugPanelProps) {
   const [fps, setFps] = useState(0);
   const frames = useRef(0);
   const lastSample = useRef(0);
+  const { currentDestination, isTransitioning } = useNavigationStore();
 
   useEffect(() => {
     let raf = 0;
@@ -42,6 +45,8 @@ export function DebugPanel({ quality, particleCount, webgl }: DebugPanelProps) {
       <p>quality: {quality}</p>
       <p>particles: {particleCount}</p>
       <p>webgl: {webgl ? "ok" : "n/a"}</p>
+      <p>destination: {currentDestination}</p>
+      <p>transitioning: {isTransitioning ? "yes" : "no"}</p>
     </div>
   );
 }
